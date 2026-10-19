@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div id="confettiContainer" class="confetti-container" aria-hidden="true"></div>
     <!-- Hero section with Intel branding -->
     <div class="hero">
       <div class="hero-content">
@@ -28,7 +29,7 @@
     <div class="attendance-tracker">
       <div class="attendance-header">
         <i class="fas fa-users"></i>
-        Attendance: <span id="attendeeCount">0</span>/50
+        Attendance: <span id="attendeeCount">0</span>/60
       </div>
       <div class="progress-container">
         <div id="progressBar" class="progress-bar"></div>
@@ -36,7 +37,14 @@
     </div>
     <div class="container">
       <!-- Feedback message -->
-      <p id="greeting"></p>
+      <p id="greeting" role="status" aria-live="polite"></p>
+      <div id="celebration" class="celebration" role="status" aria-live="polite" hidden>
+        <p class="celebration-title">🎉 Attendance goal reached! 🎉</p>
+        <p class="celebration-winner">
+          Winning team<span id="winningTeamPlural"></span>:
+          <strong id="winningTeamName"></strong>
+        </p>
+      </div>
 
       <!-- Check-in form -->
       <form class="check-in" id="checkInForm">
@@ -80,6 +88,16 @@
             <span class="team-count" id="powerCount">0</span>
           </div>
         </div>
+        <div class="attendee-list-section">
+          <h3>Checked-In Attendees</h3>
+          <div class="attendee-list-header" aria-hidden="true">
+            <span>Name</span>
+            <span>Team</span>
+          </div>
+          <ul id="attendeeList" class="attendee-list" aria-live="polite">
+            <li class="empty-attendee-list">No attendees checked in yet.</li>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -90,6 +108,9 @@
         class="footer-link"
         >Sustainability Goals</a
       >
+      <button type="button" id="pollResetButton" class="admin-reset-button">
+        Poll Reset
+      </button>
     </footer>
 
     <script src="script.js"></script>
